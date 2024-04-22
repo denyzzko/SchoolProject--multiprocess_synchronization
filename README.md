@@ -7,7 +7,7 @@ This project implements multiprocess synchronization for following task (whole t
 - If there are other skiers still waiting at bus stops, bus continues with next round.
 
 Run:
-    -make
+    -$ make
     -$ ./proj2 L Z K TL TB
         • L: skier count, L<20000
         • Z: busstop count, 0<Z<=10
