@@ -11,34 +11,30 @@
 
 #include "proj2.h"
 
-/*
-#include <sys/ipc.h>
-#include <sys/sem.h>
-#include <sys/time.h>*/
-void clean_up(int busstop_count){
-    sem_destroy(line_count_m);
-    sem_destroy(skier_id_m);
-    sem_destroy(boarding_m);
-    sem_destroy(capacity_m);
-    sem_destroy(current_busstop_m);
-    sem_destroy(waitingskier_count_m);
-    sem_destroy(busstop_waiting_count_m);
-    sem_destroy(current_buscapacity_m);
-    munmap(line_count,sizeof(int));
-	munmap(line_count_m,sizeof(sem_t));
-    munmap(skier_id,sizeof(int));
-	munmap(skier_id_m,sizeof(sem_t));
-    munmap(current_busstop,sizeof(int));
-    munmap(boarding,sizeof(bool));
-    munmap(boarding_m,sizeof(sem_t));
-    munmap(capacity_m,sizeof(sem_t));
-    munmap(current_busstop_m,sizeof(sem_t));
-    munmap(waitingskier_count,sizeof(int));
-    munmap(waitingskier_count_m,sizeof(sem_t));
-    munmap(busstop_waiting_count,sizeof(int)*busstop_count);
-    munmap(busstop_waiting_count_m,sizeof(sem_t));
-    munmap(current_buscapacity,sizeof(int));
-    munmap(current_buscapacity_m,sizeof(sem_t));
+void clean_up(int stage, int busstop_count){
+    if (stage >= 0) munmap(line_count,sizeof(int));
+	if (stage >= 1) munmap(line_count_m,sizeof(sem_t));
+    if (stage >= 2) munmap(skier_id,sizeof(int));
+	if (stage >= 3) munmap(skier_id_m,sizeof(sem_t));
+    if (stage >= 4) munmap(current_busstop,sizeof(int));
+    if (stage >= 5) munmap(boarding,sizeof(bool));
+    if (stage >= 6) munmap(boarding_m,sizeof(sem_t));
+    if (stage >= 7) munmap(capacity_m,sizeof(sem_t));
+    if (stage >= 8) munmap(current_busstop_m,sizeof(sem_t));
+    if (stage >= 9) munmap(waitingskier_count,sizeof(int));
+    if (stage >= 10) munmap(waitingskier_count_m,sizeof(sem_t));
+    if (stage >= 11) munmap(busstop_waiting_count,sizeof(int)*busstop_count);
+    if (stage >= 12) munmap(busstop_waiting_count_m,sizeof(sem_t));
+    if (stage >= 13) munmap(current_buscapacity,sizeof(int));
+    if (stage >= 14) munmap(current_buscapacity_m,sizeof(sem_t));
+    if (stage >= 15) sem_destroy(line_count_m);
+    if (stage >= 16) sem_destroy(skier_id_m);
+    if (stage >= 17) sem_destroy(boarding_m);
+    if (stage >= 18) sem_destroy(capacity_m);
+    if (stage >= 19) sem_destroy(current_busstop_m);
+    if (stage >= 20) sem_destroy(waitingskier_count_m);
+    if (stage >= 21) sem_destroy(busstop_waiting_count_m);
+    if (stage >= 22) sem_destroy(current_buscapacity_m);
 
     fclose(file);
 }
@@ -85,7 +81,6 @@ void handlingBus(int * line_count, int * current_busstop, int busstop_count, int
             (*line_count)++;
             sem_post(line_count_m);
             
-
             //allowing skiers to board
             sem_wait(boarding_m);
             *boarding = true;
@@ -338,32 +333,97 @@ int main(int argc, char *argv[]) {
 
     setbuf(file, NULL);
 
-    //initialize shared variables and semaphores
+    //initialize shared variables
     line_count = mmap(NULL, sizeof(int), PROT_READ|PROT_WRITE, MAP_SHARED|MAP_ANONYMOUS, 0, 0);
+    if (line_count == MAP_FAILED) {
+        fprintf(stderr, "Error: mmap() failed for line_count\n");
+        clean_up(0, busstop_count);
+        exit(1);
+    }
     line_count_m = mmap(NULL, sizeof(sem_t), PROT_READ|PROT_WRITE, MAP_SHARED|MAP_ANONYMOUS, 0, 0);
+    if (line_count_m == MAP_FAILED) {
+        fprintf(stderr, "Error: mmap() failed for line_count_m\n");
+        clean_up(1, busstop_count);
+        exit(1);
+    }
     skier_id = mmap(NULL, sizeof(int), PROT_READ|PROT_WRITE, MAP_SHARED|MAP_ANONYMOUS, 0, 0);
+    if (skier_id == MAP_FAILED) {
+        fprintf(stderr, "Error: mmap() failed for skier_id\n");
+        clean_up(2, busstop_count);
+        exit(1);
+    }
     skier_id_m = mmap(NULL, sizeof(sem_t), PROT_READ|PROT_WRITE, MAP_SHARED|MAP_ANONYMOUS, 0, 0);
+    if (skier_id_m == MAP_FAILED) {
+        fprintf(stderr, "Error: mmap() failed for skier_id_m\n");
+        clean_up(3, busstop_count);
+        exit(1);
+    }
     current_busstop = mmap(NULL, sizeof(int), PROT_READ|PROT_WRITE, MAP_SHARED|MAP_ANONYMOUS, 0, 0);
+    if (current_busstop == MAP_FAILED) {
+        fprintf(stderr, "Error: mmap() failed for current_busstop\n");
+        clean_up(4, busstop_count);
+        exit(1);
+    }
     boarding = mmap(NULL, sizeof(bool), PROT_READ|PROT_WRITE, MAP_SHARED|MAP_ANONYMOUS, 0, 0);
+    if (boarding == MAP_FAILED) {
+        fprintf(stderr, "Error: mmap() failed for boarding\n");
+        clean_up(5, busstop_count);
+        exit(1);
+    }
     boarding_m = mmap(NULL, sizeof(sem_t), PROT_READ|PROT_WRITE, MAP_SHARED|MAP_ANONYMOUS, 0, 0);
+    if (boarding_m == MAP_FAILED) {
+        fprintf(stderr, "Error: mmap() failed for boarding_m\n");
+        clean_up(6, busstop_count);
+        exit(1);
+    }
     capacity_m = mmap(NULL, sizeof(sem_t), PROT_READ|PROT_WRITE, MAP_SHARED|MAP_ANONYMOUS, 0, 0);
+    if (capacity_m == MAP_FAILED) {
+        fprintf(stderr, "Error: mmap() failed for capacity_m\n");
+        clean_up(7, busstop_count);
+        exit(1);
+    }
     current_busstop_m = mmap(NULL, sizeof(sem_t), PROT_READ|PROT_WRITE, MAP_SHARED|MAP_ANONYMOUS, 0, 0);
+    if (line_count == MAP_FAILED) {
+        fprintf(stderr, "Error: mmap() failed for current_busstop_m\n");
+        clean_up(8, busstop_count);
+        exit(1);
+    }
     waitingskier_count = mmap(NULL, sizeof(int), PROT_READ|PROT_WRITE, MAP_SHARED|MAP_ANONYMOUS, 0, 0);
+    if (waitingskier_count == MAP_FAILED) {
+        fprintf(stderr, "Error: mmap() failed for waitingskier_count\n");
+        clean_up(9, busstop_count);
+        exit(1);
+    }
     waitingskier_count_m = mmap(NULL, sizeof(sem_t), PROT_READ|PROT_WRITE, MAP_SHARED|MAP_ANONYMOUS, 0, 0);
+    if (waitingskier_count_m == MAP_FAILED) {
+        fprintf(stderr, "Error: mmap() failed for waitingskier_count_m\n");
+        clean_up(10, busstop_count);
+        exit(1);
+    }
     busstop_waiting_count = mmap(NULL, sizeof(int)*busstop_count, PROT_READ|PROT_WRITE, MAP_SHARED|MAP_ANONYMOUS, 0, 0);
+    if (line_count == MAP_FAILED) {
+        fprintf(stderr, "Error: mmap() failed for busstop_waiting_count\n");
+        clean_up(11, busstop_count);
+        exit(1);
+    }
     busstop_waiting_count_m = mmap(NULL, sizeof(sem_t), PROT_READ|PROT_WRITE, MAP_SHARED|MAP_ANONYMOUS, 0, 0);
+    if (busstop_waiting_count_m == MAP_FAILED) {
+        fprintf(stderr, "Error: mmap() failed for busstop_waiting_count_m\n");
+        clean_up(12, busstop_count);
+        exit(1);
+    }
     current_buscapacity = mmap(NULL, sizeof(int), PROT_READ|PROT_WRITE, MAP_SHARED|MAP_ANONYMOUS, 0, 0);
+    if (current_buscapacity == MAP_FAILED) {
+        fprintf(stderr, "Error: mmap() failed for current_buscapacity\n");
+        clean_up(13, busstop_count);
+        exit(1);
+    }
     current_buscapacity_m = mmap(NULL, sizeof(sem_t), PROT_READ|PROT_WRITE, MAP_SHARED|MAP_ANONYMOUS, 0, 0);
-
-    if ((line_count==MAP_FAILED)||(line_count_m==MAP_FAILED)||(skier_id==MAP_FAILED)||(skier_id_m==MAP_FAILED)||(current_busstop==MAP_FAILED)||
-        (boarding==MAP_FAILED)||(boarding_m==MAP_FAILED)||(capacity_m==MAP_FAILED)||(current_busstop_m==MAP_FAILED)||(waitingskier_count==MAP_FAILED)||
-        (waitingskier_count_m==MAP_FAILED)||(busstop_waiting_count==MAP_FAILED)||(busstop_waiting_count_m==MAP_FAILED)||
-        (current_buscapacity==MAP_FAILED)||(current_buscapacity_m==MAP_FAILED)) {
-	    fprintf(stderr, "Error: mmap() failed.\n");
-        // ktore mmap sa stihli vytvorit ?
-        clean_up(busstop_count);
-	    exit(1);
-	}
+    if (current_buscapacity_m == MAP_FAILED) {
+        fprintf(stderr, "Error: mmap() failed for current_buscapacity_m\n");
+        clean_up(14, busstop_count);
+        exit(1);
+    }
 
     line_count[0] = 1;
     skier_id[0] = 1;
@@ -372,13 +432,45 @@ int main(int argc, char *argv[]) {
     waitingskier_count[0] = skier_count;
     current_buscapacity[0] = bus_capacity;
 
-    if (sem_init(line_count_m, 1, 1) != 0 || sem_init(skier_id_m, 1, 1) != 0 || sem_init(boarding_m, 1, 1) != 0 || sem_init(capacity_m, 1, bus_capacity) != 0 || 
-        sem_init(current_busstop_m, 1, 1) != 0 || sem_init(waitingskier_count_m, 1, 1) != 0 || sem_init(busstop_waiting_count_m, 1, 1) != 0 || 
-        sem_init(current_buscapacity_m, 1, 1) != 0) {
-
+    //initialize semaphores
+    if (sem_init(line_count_m, 1, 1) != 0) {
         fprintf(stderr, "Error: Semaphore initialization failed.\n");
-        // ktore semafory sa stihli vytvorit ?
-        clean_up(busstop_count);
+        clean_up(15, busstop_count);
+	    exit(1);
+    }
+    if (sem_init(skier_id_m, 1, 1) != 0) {
+        fprintf(stderr, "Error: Semaphore initialization failed.\n");
+        clean_up(16, busstop_count);
+	    exit(1);
+    }
+    if (sem_init(boarding_m, 1, 1) != 0) {
+        fprintf(stderr, "Error: Semaphore initialization failed.\n");
+        clean_up(17, busstop_count);
+	    exit(1);
+    }
+    if (sem_init(capacity_m, 1, bus_capacity) != 0) {
+        fprintf(stderr, "Error: Semaphore initialization failed.\n");
+        clean_up(18, busstop_count);
+	    exit(1);
+    }
+    if (sem_init(current_busstop_m, 1, 1) != 0) {
+        fprintf(stderr, "Error: Semaphore initialization failed.\n");
+        clean_up(19, busstop_count);
+	    exit(1);
+    }
+    if (sem_init(waitingskier_count_m, 1, 1) != 0) {
+        fprintf(stderr, "Error: Semaphore initialization failed.\n");
+        clean_up(20, busstop_count);
+	    exit(1);
+    }
+    if (sem_init(busstop_waiting_count_m, 1, 1) != 0) {
+        fprintf(stderr, "Error: Semaphore initialization failed.\n");
+        clean_up(21, busstop_count);
+	    exit(1);
+    }
+    if (sem_init(current_buscapacity_m, 1, 1) != 0) {
+        fprintf(stderr, "Error: Semaphore initialization failed.\n");
+        clean_up(22, busstop_count);
 	    exit(1);
     }
 
@@ -387,7 +479,7 @@ int main(int argc, char *argv[]) {
     if (process_bus < 0){
         fprintf(stderr, "Error: Failed to create process bus.\n");
         // asi zle
-        clean_up(busstop_count);
+        clean_up(22, busstop_count);
         exit(1);
     }
     else if (process_bus == 0){
@@ -400,7 +492,7 @@ int main(int argc, char *argv[]) {
         if (process_skier < 0){
             fprintf(stderr, "Error: Failed to create process skier.\n");
             // asi zle
-            clean_up(busstop_count);
+            clean_up(22, busstop_count);
             exit(1);
         }
         else if (process_skier == 0){
@@ -418,8 +510,7 @@ int main(int argc, char *argv[]) {
     // wait for child processes
     while(wait(NULL) > 0);
 
-    clean_up(busstop_count);
+    clean_up(22, busstop_count);
 
     return 0;
 }
-

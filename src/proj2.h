@@ -39,8 +39,8 @@ sem_t *current_buscapacity_m;
 pid_t process_bus;
 pid_t process_skier;
 
-// function to destroy semaphores, clean allocated resources and close file proj2.out
-void clean_up(int busstop_count);
+// function to clean allocated resources, destroy semaphores and close file proj2.out
+void clean_up(int stage, int busstop_count);
 
 // function to validate correct ranges of input arguments
 void validate_parameters(int skier_count, int busstop_count, int bus_capacity, int skier_wait, int travel_time);
