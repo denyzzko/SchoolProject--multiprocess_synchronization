@@ -1,16 +1,16 @@
 1: BUS: started
 2: L 1: started
-3: L 1: arrived to 4
+3: L 1: arrived to 2
 4: L 2: started
 5: L 2: arrived to 2
 6: L 3: started
-7: L 3: arrived to 1
+7: L 3: arrived to 5
 8: L 4: started
 9: L 4: arrived to 1
 10: L 5: started
-11: L 5: arrived to 4
+11: L 5: arrived to 5
 12: L 6: started
-13: L 6: arrived to 5
+13: L 6: arrived to 1
 14: L 7: started
 15: L 7: arrived to 1
 16: L 8: started
@@ -18,78 +18,78 @@
 18: L 9: started
 19: L 9: arrived to 3
 20: L 10: started
-21: L 10: arrived to 1
+21: L 10: arrived to 4
 22: L 11: started
 23: L 11: arrived to 5
 24: L 12: started
 25: L 12: arrived to 5
 26: L 13: started
-27: L 13: arrived to 4
+27: L 13: arrived to 2
 28: L 14: started
-29: L 14: arrived to 2
+29: L 14: arrived to 5
 30: L 15: started
-31: L 15: arrived to 4
+31: L 15: arrived to 5
 32: L 16: started
-33: L 16: arrived to 3
+33: L 16: arrived to 5
 34: L 17: started
 35: L 17: arrived to 4
 36: L 18: started
-37: L 18: arrived to 1
+37: L 18: arrived to 5
 38: L 19: started
-39: L 21: started
+39: L 19: arrived to 1
 40: L 20: started
-41: L 21: arrived to 4
-42: L 19: arrived to 2
-43: L 20: arrived to 1
+41: L 20: arrived to 5
+42: L 21: started
+43: L 21: arrived to 3
 44: L 22: started
-45: L 22: arrived to 4
+45: L 22: arrived to 5
 46: L 23: started
-47: L 23: arrived to 4
+47: L 23: arrived to 2
 48: L 24: started
 49: L 24: arrived to 3
 50: L 25: started
-51: L 25: arrived to 5
+51: L 25: arrived to 1
 52: L 26: started
-53: L 26: arrived to 2
+53: L 26: arrived to 5
 54: L 27: started
-55: L 27: arrived to 5
+55: L 27: arrived to 1
 56: L 28: started
-57: L 28: arrived to 2
-58: L 29: started
+57: L 29: started
+58: L 30: started
 59: L 29: arrived to 1
-60: L 30: started
-61: L 30: arrived to 3
-62: L 31: started
-63: L 31: arrived to 3
-64: L 32: started
-65: L 32: arrived to 4
-66: L 33: started
+60: L 28: arrived to 1
+61: L 31: started
+62: L 32: started
+63: L 31: arrived to 1
+64: L 30: arrived to 1
+65: L 33: started
+66: L 34: started
 67: L 33: arrived to 2
-68: L 34: started
-69: L 34: arrived to 1
-70: L 35: started
-71: L 35: arrived to 4
-72: L 36: started
-73: L 36: arrived to 1
-74: L 37: started
-75: L 37: arrived to 1
+68: L 32: arrived to 2
+69: L 35: started
+70: L 36: started
+71: L 36: arrived to 5
+72: L 35: arrived to 2
+73: L 37: started
+74: L 34: arrived to 4
+75: L 37: arrived to 2
 76: L 38: started
-77: L 38: arrived to 5
-78: L 39: started
-79: L 39: arrived to 3
-80: L 40: started
-81: L 40: arrived to 5
+77: L 39: started
+78: L 40: started
+79: L 40: arrived to 5
+80: L 38: arrived to 3
+81: L 39: arrived to 4
 82: BUS: arrived to 1
-83: L 29: boarding
-84: L 34: boarding
-85: L 10: boarding
-86: L 18: boarding
-87: L 7: boarding
-88: L 8: boarding
-89: L 4: boarding
-90: L 37: boarding
-91: L 20: boarding
-92: L 3: boarding
+83: L 30: boarding
+84: L 29: boarding
+85: L 19: boarding
+86: L 8: boarding
+87: L 28: boarding
+88: L 31: boarding
+89: L 7: boarding
+90: L 25: boarding
+91: L 27: boarding
+92: L 4: boarding
 93: BUS: leaving 1
 94: BUS: arrived to 2
 95: BUS: leaving 2
@@ -100,80 +100,80 @@
 100: BUS: arrived to 5
 101: BUS: leaving 5
 102: BUS: arrived to final
-103: L 7: going to ski
-104: L 18: going to ski
-105: L 4: going to ski
-106: L 8: going to ski
-107: L 29: going to ski
-108: L 20: going to ski
-109: L 34: going to ski
-110: L 3: going to ski
-111: L 10: going to ski
-112: L 37: going to ski
+103: L 29: going to ski
+104: L 27: going to ski
+105: L 25: going to ski
+106: L 19: going to ski
+107: L 8: going to ski
+108: L 28: going to ski
+109: L 31: going to ski
+110: L 30: going to ski
+111: L 4: going to ski
+112: L 7: going to ski
 113: BUS: leaving final
 114: BUS: arrived to 1
-115: L 36: boarding
+115: L 6: boarding
 116: BUS: leaving 1
 117: BUS: arrived to 2
-118: L 2: boarding
-119: L 14: boarding
-120: L 33: boarding
-121: L 19: boarding
-122: L 26: boarding
-123: L 28: boarding
-124: BUS: leaving 2
-125: BUS: arrived to 3
-126: L 16: boarding
-127: L 9: boarding
-128: L 39: boarding
+118: L 13: boarding
+119: L 35: boarding
+120: L 37: boarding
+121: L 33: boarding
+122: L 23: boarding
+123: L 2: boarding
+124: L 1: boarding
+125: L 32: boarding
+126: BUS: leaving 2
+127: BUS: arrived to 3
+128: L 21: boarding
 129: BUS: leaving 3
 130: BUS: arrived to 4
 131: BUS: leaving 4
 132: BUS: arrived to 5
 133: BUS: leaving 5
 134: BUS: arrived to final
-135: L 26: going to ski
-136: L 36: going to ski
-137: L 9: going to ski
-138: L 33: going to ski
-139: L 39: going to ski
-140: L 2: going to ski
-141: L 14: going to ski
-142: L 19: going to ski
-143: L 28: going to ski
-144: L 16: going to ski
+135: L 23: going to ski
+136: L 6: going to ski
+137: L 21: going to ski
+138: L 13: going to ski
+139: L 1: going to ski
+140: L 35: going to ski
+141: L 33: going to ski
+142: L 2: going to ski
+143: L 37: going to ski
+144: L 32: going to ski
 145: BUS: leaving final
 146: BUS: arrived to 1
 147: BUS: leaving 1
 148: BUS: arrived to 2
 149: BUS: leaving 2
 150: BUS: arrived to 3
-151: L 24: boarding
-152: L 31: boarding
-153: L 30: boarding
+151: L 38: boarding
+152: L 9: boarding
+153: L 24: boarding
 154: BUS: leaving 3
 155: BUS: arrived to 4
-156: L 13: boarding
-157: L 22: boarding
-158: L 1: boarding
-159: L 35: boarding
-160: L 32: boarding
-161: L 15: boarding
-162: L 23: boarding
-163: BUS: leaving 4
-164: BUS: arrived to 5
+156: L 34: boarding
+157: L 10: boarding
+158: L 17: boarding
+159: L 39: boarding
+160: BUS: leaving 4
+161: BUS: arrived to 5
+162: L 5: boarding
+163: L 20: boarding
+164: L 26: boarding
 165: BUS: leaving 5
 166: BUS: arrived to final
-167: L 13: going to ski
-168: L 22: going to ski
-169: L 35: going to ski
-170: L 32: going to ski
-171: L 31: going to ski
-172: L 15: going to ski
-173: L 23: going to ski
-174: L 1: going to ski
-175: L 30: going to ski
-176: L 24: going to ski
+167: L 26: going to ski
+168: L 39: going to ski
+169: L 5: going to ski
+170: L 20: going to ski
+171: L 10: going to ski
+172: L 34: going to ski
+173: L 24: going to ski
+174: L 9: going to ski
+175: L 38: going to ski
+176: L 17: going to ski
 177: BUS: leaving final
 178: BUS: arrived to 1
 179: BUS: leaving 1
@@ -182,29 +182,29 @@
 182: BUS: arrived to 3
 183: BUS: leaving 3
 184: BUS: arrived to 4
-185: L 17: boarding
-186: L 21: boarding
-187: L 5: boarding
-188: BUS: leaving 4
-189: BUS: arrived to 5
-190: L 27: boarding
-191: L 6: boarding
-192: L 12: boarding
-193: L 25: boarding
-194: L 38: boarding
-195: L 11: boarding
-196: L 40: boarding
+185: BUS: leaving 4
+186: BUS: arrived to 5
+187: L 11: boarding
+188: L 22: boarding
+189: L 40: boarding
+190: L 16: boarding
+191: L 14: boarding
+192: L 3: boarding
+193: L 15: boarding
+194: L 18: boarding
+195: L 36: boarding
+196: L 12: boarding
 197: BUS: leaving 5
 198: BUS: arrived to final
-199: L 5: going to ski
-200: L 25: going to ski
-201: L 27: going to ski
-202: L 17: going to ski
-203: L 6: going to ski
+199: L 22: going to ski
+200: L 3: going to ski
+201: L 14: going to ski
+202: L 15: going to ski
+203: L 16: going to ski
 204: L 40: going to ski
-205: L 38: going to ski
-206: L 21: going to ski
-207: L 12: going to ski
-208: L 11: going to ski
+205: L 18: going to ski
+206: L 36: going to ski
+207: L 11: going to ski
+208: L 12: going to ski
 209: BUS: leaving final
 210: BUS: finish

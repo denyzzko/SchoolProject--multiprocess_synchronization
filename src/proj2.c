@@ -1,3 +1,10 @@
+/**
+ * @file proj2.c
+ * @brief Multiprocess synchronization.
+ * @author Denis Milistenfer <xmilis00@stud.fit.vutbr.cz>
+ * @date 22.4.2024
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
