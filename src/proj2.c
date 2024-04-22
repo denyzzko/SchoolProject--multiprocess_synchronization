@@ -478,7 +478,6 @@ int main(int argc, char *argv[]) {
     process_bus = fork();
     if (process_bus < 0){
         fprintf(stderr, "Error: Failed to create process bus.\n");
-        // asi zle
         clean_up(22, busstop_count);
         exit(1);
     }
@@ -491,7 +490,6 @@ int main(int argc, char *argv[]) {
         process_skier = fork();
         if (process_skier < 0){
             fprintf(stderr, "Error: Failed to create process skier.\n");
-            // asi zle
             clean_up(22, busstop_count);
             exit(1);
         }
