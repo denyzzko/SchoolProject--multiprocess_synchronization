@@ -30,17 +30,17 @@ int *line_count;
 int *skier_id;
 int *current_busstop;
 int *waitingskier_count;
-bool *boarding;
 int *busstop_waiting_count;
 int *current_buscapacity;
 sem_t *line_count_m;
 sem_t *skier_id_m;
-sem_t *boarding_m;
-sem_t *capacity_m;
 sem_t *current_busstop_m;
 sem_t *waitingskier_count_m;
 sem_t *busstop_waiting_count_m;
 sem_t *current_buscapacity_m;
+sem_t *busstops_ms;
+sem_t *skiers_boarding_m;
+sem_t *busatstop_m;
 
 // child processes
 pid_t process_bus;
@@ -53,7 +53,7 @@ void clean_up(int stage, int busstop_count);
 void validate_parameters(int skier_count, int busstop_count, int bus_capacity, int skier_wait, int travel_time);
 
 // function to handle process for skibus
-void handlingBus(int * line_count, int * current_busstop, int busstop_count, int travel_time, int *waitingskier_count, bool *boarding, int *busstop_waiting_count, int *current_buscapacity, int bus_capacity);
+void handlingBus(int * line_count, int * current_busstop, int busstop_count, int travel_time, int *waitingskier_count, int *busstop_waiting_count, int *current_buscapacity, int bus_capacity);
 
 // function to handle process for skier
-void handlingSkier(int * line_count, int * skier_id, int random_busstop, int * current_busstop, int *waitingskier_count, bool *boarding, int busstop_count, int *busstop_waiting_count, int *current_buscapacity);
+void handlingSkier(int * line_count, int * skier_id, int random_busstop, int *waitingskier_count, int busstop_count, int *busstop_waiting_count, int *current_buscapacity, int bus_capacity);
