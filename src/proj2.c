@@ -442,7 +442,6 @@ int main(int argc, char *argv[]) {
     }
     for (int i = 0; i <= busstop_count; i++) {
         if (sem_init(&busstops_ms[i], 1, 0) != 0) {
-            //put to clean_up()
             fprintf(stderr, "Error: Semaphore busstops_ms at index %d failed.\n", i);
             for (int j = 0; j < i; j++) {
                 sem_destroy(&busstops_ms[j]);
@@ -483,7 +482,6 @@ int main(int argc, char *argv[]) {
         }
         else if (process_skier == 0){
             sem_wait(skier_id_m);
-            //does this count as: "Hlavni proces každému lyžaři při jeho spuštění náhodně přidělí nástupní zastávku"
             // seed the random number
             srand(time(NULL) + getpid());
             random_busstop = (rand() % busstop_count) + 1;
