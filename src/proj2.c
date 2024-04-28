@@ -77,7 +77,6 @@ void validate_parameters(int skier_count, int busstop_count, int bus_capacity, i
 void handlingBus(int * line_count, int * current_busstop, int busstop_count, int travel_time, int *waitingskier_count, int *busstop_waiting_count, int *current_buscapacity, int bus_capacity){
     //starting bus
     sem_wait(line_count_m);
-    printf("%d: BUS: started\n", *line_count);
     fprintf(file, "%d: BUS: started\n", *line_count);
     (*line_count)++;
     sem_post(line_count_m);
@@ -91,7 +90,6 @@ void handlingBus(int * line_count, int * current_busstop, int busstop_count, int
             usleep(rand() % (travel_time + 1));
             sem_wait(busatstop_m);
             sem_wait(line_count_m);
-            printf("%d: BUS: arrived to %d\n", *line_count, *current_busstop);
             fprintf(file, "%d: BUS: arrived to %d\n", *line_count, *current_busstop);
             (*line_count)++;
             
@@ -109,7 +107,6 @@ void handlingBus(int * line_count, int * current_busstop, int busstop_count, int
                 sem_wait(&busstops_ms[*current_busstop - 1]);
                 sem_wait(current_busstop_m);
                 sem_wait(line_count_m);
-                printf("%d: BUS: leaving %d\n", *line_count, *current_busstop);
                 fprintf(file, "%d: BUS: leaving %d\n", *line_count, *current_busstop);
                 (*line_count)++;
                 (*current_busstop)++;
@@ -122,7 +119,6 @@ void handlingBus(int * line_count, int * current_busstop, int busstop_count, int
                 sem_post(busstop_waiting_count_m);
                 sem_wait(current_busstop_m);
                 sem_wait(line_count_m);
-                printf("%d: BUS: leaving %d\n", *line_count, *current_busstop);
                 fprintf(file, "%d: BUS: leaving %d\n", *line_count, *current_busstop);
                 (*line_count)++;
                 (*current_busstop)++;
@@ -137,7 +133,6 @@ void handlingBus(int * line_count, int * current_busstop, int busstop_count, int
             usleep(rand() % (travel_time + 1));
             sem_wait(busatstop_m);
             sem_wait(line_count_m);
-            printf("%d: BUS: arrived to final\n", *line_count);
             fprintf(file, "%d: BUS: arrived to final\n", *line_count);
             (*line_count)++;
 
@@ -154,7 +149,6 @@ void handlingBus(int * line_count, int * current_busstop, int busstop_count, int
                 //leaving final
                 sem_wait(&busstops_ms[busstop_count]);
                 sem_wait(line_count_m);
-                printf("%d: BUS: leaving final\n", *line_count);
                 fprintf(file, "%d: BUS: leaving final\n", *line_count);
                 (*line_count)++;
                 sem_post(line_count_m);
@@ -164,7 +158,6 @@ void handlingBus(int * line_count, int * current_busstop, int busstop_count, int
                 //leaving final
                 sem_post(current_buscapacity_m);
                 sem_wait(line_count_m);
-                printf("%d: BUS: leaving final\n", *line_count);
                 fprintf(file, "%d: BUS: leaving final\n", *line_count);
                 (*line_count)++;
                 sem_post(line_count_m);
@@ -189,7 +182,6 @@ void handlingBus(int * line_count, int * current_busstop, int busstop_count, int
     }
     //finishing bus
     sem_wait(line_count_m);
-    printf("%d: BUS: finish\n", *line_count);
     fprintf(file, "%d: BUS: finish\n", *line_count);
     (*line_count)++;
     sem_post(line_count_m);
@@ -202,7 +194,7 @@ void handlingSkier(int * line_count, int * skier_id, int random_busstop, int *wa
 
     //starting skier
     sem_wait(line_count_m);
-    printf("%d: L %d: started\n", *line_count, currentskier_id);
+    
     fprintf(file, "%d: L %d: started\n", *line_count, currentskier_id);
     (*line_count)++;
     sem_post(line_count_m);
@@ -215,7 +207,6 @@ void handlingSkier(int * line_count, int * skier_id, int random_busstop, int *wa
     sem_wait(busatstop_m); 
     sem_wait(busstop_waiting_count_m);
     sem_wait(line_count_m);
-    printf("%d: L %d: arrived to %d\n", *line_count, currentskier_id, random_busstop);
     fprintf(file, "%d: L %d: arrived to %d\n", *line_count, currentskier_id, random_busstop);
     (*line_count)++;
     
@@ -235,7 +226,6 @@ void handlingSkier(int * line_count, int * skier_id, int random_busstop, int *wa
             sem_wait(busstop_waiting_count_m);
             sem_wait(waitingskier_count_m);
 			sem_wait(line_count_m);
-			printf("%d: L %d: boarding\n", *line_count, currentskier_id);
 			fprintf(file, "%d: L %d: boarding\n", *line_count, currentskier_id);
 			(*line_count)++;
 
@@ -270,7 +260,6 @@ void handlingSkier(int * line_count, int * skier_id, int random_busstop, int *wa
     sem_wait(&busstops_ms[busstop_count]);
     //skier can aboard and go to ski
     sem_wait(line_count_m);
-    printf("%d: L %d: going to ski\n", *line_count, currentskier_id);
     fprintf(file, "%d: L %d: going to ski\n", *line_count, currentskier_id);
     (*line_count)++;
 
